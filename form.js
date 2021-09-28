@@ -148,7 +148,7 @@ async function checkresult(){
     flag=false
     userdet=localStorage.getItem("user")
     conslist0=field[4].slice(0,field[4].length)
-    for(i=1;i<=field[4].length;i++){
+    /*for(i=1;i<=field[4].length;i++){
         temp=field[4].slice(0,field[4].length);
         console.log(temp[i]);  
         connum=temp[i].length;
@@ -160,7 +160,7 @@ async function checkresult(){
         if(flag=true){
             alert("Consignment number digit check")
         }
-        else{
+        else{*/
     
     
     conslist0.shift()
@@ -174,7 +174,7 @@ async function checkresult(){
     console.log("num of cons is", S)
     console.log("num of line is is", n)
     brace="]"
-    checkurl ="http://127.0.0.1:5000/consignment?consignId=["+conslist0+"]"
+    checkurl ="http://13.91.100.9:5000/consignment?consignId=["+conslist0+"]"
     //checkurl ="http://127.0.0.1:5000/consignment?consignId=[8001]"
     console.log(checkurl)
     //await fetch(checkurl).then(response => response.json()).then(data => console.log(data));
@@ -196,14 +196,14 @@ async function checkresult(){
         showresult();
     }
 }
-}
+
 
 async function insert(showresult){ 
     console.log("Data getting inserted")
     userdet=localStorage.getItem("user")
     conslist1=field[4].slice(0,field[4].length)
     conslist1.shift()
-    insertUrl1="http://127.0.0.1:5000/addconsignment?user_ID="+userdet+"&consignment=["+conslist1+"]&consignment_type="+field[3]
+    insertUrl1="http://13.91.100.9:5000/addconsignment?user_ID="+userdet+"&consignment=["+conslist1+"]&consignment_type="+field[3]
     
     console.log("inserted",conslist1)
     S=conslist1.length
@@ -213,7 +213,7 @@ async function insert(showresult){
     result=S * [x + (n*1/y)]
     result2=result/100
     
-    insertUrl2="http://127.0.0.1:5000/addkpi?user_ID="+userdet+"&totalconsignment="+S+"&consignment_type="+field[3]+"&workingTime="+result+"&kpi="+result2
+    insertUrl2="http://13.91.100.9:5000/addkpi?user_ID="+userdet+"&totalconsignment="+S+"&consignment_type="+field[3]+"&workingTime="+result+"&kpi="+result2
     await fetch(insertUrl1);
     await fetch(insertUrl2);
     showresult();

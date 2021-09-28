@@ -1,3 +1,4 @@
+/*
 function piechart(){
 var chartDom = document.getElementById('pie');
 var myChart = echarts.init(chartDom);
@@ -63,10 +64,21 @@ function barchart(){
         series: [{ type: 'bar' }, { type: 'bar' }]
       };
       option && myChart.setOption(option);
-}
+}*/
+
+var mychart1
+var mychart2
+var mychart3
 function userkpipie(){
+  console.log("My chart",mychart1)
+  if ( mychart1 != null && mychart1 != "" && mychart1 != undefined ) {
+    mychart1.dispose();
+}
+ 
+  
+   $('#userkpipiediv').show();
     var chartDom = document.getElementById('userkpipie');
-    var myChart = echarts.init(chartDom);
+    var myChart1 = echarts.init(chartDom);
     
     
       option = {
@@ -88,10 +100,10 @@ function userkpipie(){
             selectedMode: 'single',
             data: [
               {
-                value: 548,
+                value: kpi[0],
                 name: 'Import Declaration',
               },
-              { value: 735, name: 'Arrival' }
+              { value: kpi[1], name: 'Arrival' }
             ],
             
             
@@ -99,11 +111,17 @@ function userkpipie(){
         ]
       };
     
-      option && myChart.setOption(option);
+      option && myChart1.setOption(option);
 }
-function userwtpie(){
+async function userwtpie(){
+  if ( mychart2 != null && mychart2 != "" && mychart2 != undefined ) {
+    mychart2.dispose();
+}
+
+  $('#userwtpiediv').show();
+
         var chartDom = document.getElementById('userwtpie');
-        var myChart = echarts.init(chartDom);
+        var myChart2 = echarts.init(chartDom);
         
         
           option = {
@@ -125,10 +143,10 @@ function userwtpie(){
                 selectedMode: 'single',
                 data: [
                   {
-                    value: 1048,
+                    value: wt[0],
                     name: 'Import Declaration',
                   },
-                  { value: 1035, name: 'Arrival' }
+                  { value: wt[1], name: 'Arrival' }
                 ],
                 
                 
@@ -136,11 +154,16 @@ function userwtpie(){
             ]
           };
         
-          option && myChart.setOption(option);
+          option && myChart2.setOption(option);
 }
 function userwtkpiweek(){
+  if ( mychart3 != null && mychart3 != "" && mychart3 != undefined ) {
+    mychart3.dispose();
+}
+
+  $('#userwtkpiweekdiv').show();
     var chartDom = document.getElementById('userwtkpiweek');
-        var myChart = echarts.init(chartDom);
+        var myChart3 = echarts.init(chartDom);
         
     option = {
         title: {
@@ -174,7 +197,7 @@ function userwtkpiweek(){
         xAxis: [
           {
             type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            data: dict["Dates"],
             axisPointer: {
               type: 'shadow'
             }
@@ -206,27 +229,58 @@ function userwtkpiweek(){
           {
             name: 'KPI',
             type: 'bar',
-            data: [
-              5.0,4.0,6.0,5.0,6.0,10.0
-            ]
+            data: dict["kPI"]
           },
           {
             name: 'Working Time',
             type: 'line',
-            data: [
-              8.6,8.0,7.2,6.0,8.5,9.0
-            ]
+            data: dict["work time"]
           },
         ]
       };
-      option && myChart.setOption(option);
+      option && myChart3.setOption(option);
 
 }
-
+async function getdata(){
+  user_id=document.getElementById("myInput").value
+  //user_id=1001
+  console.log("Getting report for User",user_id)
+  checkurl1 ="http://13.91.100.9:5000/perDay?user_id="+user_id;
+  checkurl2 ="http://13.91.100.9:5000/week?user_id="+user_id;
+  console.log(checkurl1,checkurl2)
+  const response = await fetch(checkurl1);
+  var data = await response.json();
+  console.log(data)
+  kpi=data[0]
+  wt=data[1]
+  console.log("KPI ",kpi)
+  console.log("WT ",wt)
+  const response2 = await fetch(checkurl2);
+  var data2 = await response2.json();
+  dict=data2
+  console.log(data2)
+  $('#userwtkpiweek').empty();
+  $('#userwtpie').empty();
+  $('#userkpipie').empty();
+  
+  $('#userwtkpiweek').show();
+  $('#userwtpie').show();
+  $('#userkpipie').show();
+  
+}
+async function loadchart(){
+  await getdata()
+  userkpipie();
+  userwtpie();
+  userwtkpiweek();
+  
+}
 window.onload = function(e){ 
- piechart();
- barchart();
- userkpipie();
- userwtpie();
- userwtkpiweek();
+  
+  $('#userwtkpiweek').hide();
+  $('#userwtpie').hide();
+  $('#userkpipie').hide();
+  //piechart();
+ //barchart();
+ 
 }
