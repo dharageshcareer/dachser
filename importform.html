@@ -1,0 +1,74 @@
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    /* Create two equal columns that floats next to each other */
+    .column {
+	float: left;
+	width: 50%;
+	padding: 10px;
+	height: auto; /* Should be removed. Only for demonstration */
+	background-color:#1359ad;
+  }
+  
+    /* Clear floats after the columns */
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    height: auto; /* Should be removed. Only for demonstration */
+	background-color:#1359ad;
+    }
+legend{
+	color: #0353b6;
+	border-top: 1px solid #71a0da;
+	border-left: 1px solid #71a0da;
+	border-right: 1px solid #71a0da;
+	border-radius: 5px 5px 0px 0px;
+	-webkit-border-radius: 5px 5px 0px 0px;
+	-moz-border-radius: 5px 5px 0px 0px;
+	background: #FFF4F4;
+	padding: 0px 8px 3px 8px;
+	box-shadow: -0px -1px 2px #F1F1F1;
+	-moz-box-shadow:-0px -1px 2px #F1F1F1;
+	-webkit-box-shadow:-0px -1px 2px #F1F1F1;
+	font-weight: normal;
+	font-size: 20px;
+}
+</style>
+<body>
+<legend>Custom Import</legend>
+<input type="button" id="back" value="back" onclick="goback();"></input>
+
+<input type="button" id="subbutton" value="submit" onclick="submitresult();"></input>
+
+<div class="row" style="background-color: #1359ad ;">
+<div class="column">  
+<label for="Upload Consignment Numbers in Excel">Upload Consignment Numbers in Excel:</label>
+<input type="button" id="button2" value="clear all" onclick="clear_array();"></input>
+<input type="file" id="exinput" accept=".xls,.xlsx,.ods,.csv">
+</div>
+<div class="column">  
+    <label for="Enter Number of lines">Enter Number of lines</label>
+    <input type="text" id="text2"></input>
+    <input type="button" id="button3" value="Add" onclick="add_element_to_array2();"></input>
+    <input type="button" id="button4" value="clear" onclick="clear_array2();"></input>
+    </div>
+</div>
+<div class="row" style="background-color: #1359ad ;"> 
+    <div class="column">
+    <pre id="exresult"></pre>
+    <div id=Result></div>
+</div>
+<div class="column">
+    <div id=Result2></div>
+</div>
+</div>
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="excel.js"></script>
+
