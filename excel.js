@@ -19,7 +19,8 @@ function excelfun() {
     console.log(field[4])
     // data preview
     var output = document.getElementById('Result');
-    output.innerHTML = field[4]
+    
+    output.innerHTML = "Total Consignment in Excel is "+(field[4].length-1)
   };
   FR.readAsArrayBuffer(file.files[0]);
 }
@@ -48,7 +49,7 @@ function excelfun1() {
                 // data preview
                 $("#Result").empty()
                 var output = document.getElementById('Result');
-                output.innerHTML = field[4]
+                output.innerHTML = field[4].length-1
               };
               FR.readAsArrayBuffer(fileUpload.files[0]);
           } else {

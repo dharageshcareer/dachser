@@ -32,7 +32,9 @@ $(document).ready(function() {
             switch (select) {
                 case "Import_Declaration":
                    //appending option under Import;
+                  
                    $("form").empty(); // initialize empty
+                   
                    $("form").append("<p>Country:"+field[0]+"</p>");
                    $("form").append("<p>Branch:"+field[1]+"</p>");
                    $("form").append("<p>Team:"+field[2]+"</p>");
@@ -234,7 +236,7 @@ function showresult(){
     result2=result/100
     console.log("S is", S)
     console.log("n is", n)
-    var e="<button onclick=goBack()>Back</button>"
+    var e="<button class='btn btn-danger' onclick=goBack()>Back</button>"
     
     $("form").empty(); // initialize empty
     $("form").append(e);
@@ -280,18 +282,29 @@ function submitresult(){
 
 
 function validate(){
+    location.replace("http://dachserkpi.westus.cloudapp.azure.com/home.html")
     var username = document.getElementById("username").value;
     localStorage.setItem("user", username);
     
     var password = document.getElementById("password").value;
-    if ( username == "1001" && password == "1001"){
+    if ( username == 1001 && password == 1001){
+    console.log("redirecting")
+    location.replace("http://dachserkpi.westus.cloudapp.azure.com/home.html")
     alert ("Login successfully");
-    return false;
     }
     else{
     // Decrementing by one.
     alert("Please try login with correct credentials");
-    return false;
+    window.location.href = "http://dachserkpi.westus.cloudapp.azure.com/";
+
+  
     }
     }
+
+    document.querySelector("#myForm").addEventListener("submit", function(e){
+        // Prevent the form from submitting
+        e.preventDefault();
+        // login() will be called when the form is submitted
+        validate();
+    });
     

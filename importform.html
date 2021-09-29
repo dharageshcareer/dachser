@@ -37,12 +37,10 @@ legend{
 	font-size: 20px;
 }
 </style>
-<body>
+<button class='btn btn-danger' onclick=goBack()>Back</button>
 <legend>Custom Import</legend>
-<input type="button" id="back" value="back" onclick="goback();"></input>
 
-<input type="button" id="subbutton" value="submit" onclick="submitresult();"></input>
-
+<input style="background: #28a745; width:200px; font-size:18px;" type="button" id="subbutton" value="submit" onclick="submitresult();"></input>
 <div class="row" style="background-color: #1359ad ;">
 <div class="column">  
 <label for="Upload Consignment Numbers in Excel">Upload Consignment Numbers in Excel:</label>
@@ -58,6 +56,7 @@ legend{
     
     </div>
 </div>
+
 <div class="row" style="background-color: #1359ad ;"> 
     <div class="column">
     <pre id="exresult"></pre>
@@ -68,7 +67,7 @@ legend{
 </div>
 </div>
 
-</body>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
