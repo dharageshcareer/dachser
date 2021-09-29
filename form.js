@@ -103,6 +103,7 @@ function clear_array()
    array=[]  
    var e = "<p>Cleared add again</p>" 
    console.log(array)
+   $("#exinput").empty()
     $("#Result").empty(); // initialize empty
     $("#Result").append(e);
    
@@ -174,7 +175,7 @@ async function checkresult(){
     console.log("num of cons is", S)
     console.log("num of line is is", n)
     brace="]"
-    checkurl ="http://13.91.100.9:5000/consignment?consignId=["+conslist0+"]"
+    checkurl ="http://dachserkpi.westus.cloudapp.azure.com:5000/consignment?consignId=["+conslist0+"]"
     //checkurl ="http://127.0.0.1:5000/consignment?consignId=[8001]"
     console.log(checkurl)
     //await fetch(checkurl).then(response => response.json()).then(data => console.log(data));
@@ -203,7 +204,7 @@ async function insert(showresult){
     userdet=localStorage.getItem("user")
     conslist1=field[4].slice(0,field[4].length)
     conslist1.shift()
-    insertUrl1="http://13.91.100.9:5000/addconsignment?user_ID="+userdet+"&consignment=["+conslist1+"]&consignment_type="+field[3]
+    insertUrl1="http://dachserkpi.westus.cloudapp.azure.com:5000/addconsignment?user_ID="+userdet+"&consignment=["+conslist1+"]&consignment_type="+field[3]
     
     console.log("inserted",conslist1)
     S=conslist1.length
@@ -213,7 +214,7 @@ async function insert(showresult){
     result=S * [x + (n*1/y)]
     result2=result/100
     
-    insertUrl2="http://13.91.100.9:5000/addkpi?user_ID="+userdet+"&totalconsignment="+S+"&consignment_type="+field[3]+"&workingTime="+result+"&kpi="+result2
+    insertUrl2="http://dachserkpi.westus.cloudapp.azure.com:5000/addkpi?user_ID="+userdet+"&totalconsignment="+S+"&consignment_type="+field[3]+"&workingTime="+result+"&kpi="+result2
     await fetch(insertUrl1);
     await fetch(insertUrl2);
     showresult();

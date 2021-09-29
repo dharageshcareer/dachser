@@ -245,8 +245,8 @@ async function getdata(){
   user_id=document.getElementById("myInput").value
   //user_id=1001
   console.log("Getting report for User",user_id)
-  checkurl1 ="http://13.91.100.9:5000/perDay?user_id="+user_id;
-  checkurl2 ="http://13.91.100.9:5000/week?user_id="+user_id;
+  checkurl1 ="http://dachserkpi.westus.cloudapp.azure.com:5000/perDay?user_id="+user_id;
+  checkurl2 ="http://dachserkpi.westus.cloudapp.azure.com:5000/week?user_id="+user_id;
   console.log(checkurl1,checkurl2)
   const response = await fetch(checkurl1);
   var data = await response.json();
