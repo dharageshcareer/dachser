@@ -277,19 +277,23 @@ function submitresult(){
     localStorage.clear();
     localStorage.setItem('user',myItem);
     console.log(myItem,"username---------------------");
+    $("form").empty(); // initialize empty
+    $.get("loading.html", function(htmloptions) { //append option from html file
+        $("form").append(htmloptions);
+    });
     checkresult();
 }
 
 
 function validate(){
-    location.replace("http://dachserkpi.westus.cloudapp.azure.com/home.html")
+    location.replace("localhost/home.html")
     var username = document.getElementById("username").value;
     localStorage.setItem("user", username);
     
     var password = document.getElementById("password").value;
     if ( username == 1001 && password == 1001){
     console.log("redirecting")
-    location.replace("http://dachserkpi.westus.cloudapp.azure.com/home.html")
+    location.replace("localhost/home.html")
     alert ("Login successfully");
     }
     else{

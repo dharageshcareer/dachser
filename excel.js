@@ -16,11 +16,23 @@ function excelfun() {
     
     // header: 1 instructs xlsx to create an 'array of arrays'
     field[4] = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+    nooflines = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
     console.log(field[4])
+    array2[0]=nooflines[1][1]
+    /*for(i=1;i<=field[4].length;i++){
+      if(field[4][i][1].length != 11){
+        console.log("nOT 11 IS",field[4][i][1])
+      }
+      else{
+        console.log("Every are 11")
+      }
+    }*/
+    console.log(array2[0])
     // data preview
     var output = document.getElementById('Result');
     
-    output.innerHTML = "Total Consignment in Excel is "+(field[4].length-1)
+    output.innerHTML = "Total Consignment in Excel is "+(field[4].length-1)+"<br />" +"No of Lines is "+array2[0]+"<br />"+"<input style='background: #28a745; width:200px; font-size:18px;' type='button' id='subbutton' value='submit' onclick='submitresult();'></input>"
+    
   };
   FR.readAsArrayBuffer(file.files[0]);
 }
