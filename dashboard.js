@@ -157,13 +157,18 @@ async function userwtpie(){
           option && myChart2.setOption(option);
 }
 function userwtkpiweek(){
-  if ( mychart3 != null && mychart3 != "" && mychart3 != undefined ) {
-    mychart3.dispose();
-}
-
+  if ( chartDom != null && chartDom != "" && chartDom != undefined ) {
+    console.log("Removing Chart 3")
+    chartDom.dispose();
+   }
   $('#userwtkpiweekdiv').show();
-    var chartDom = document.getElementById('userwtkpiweek');
+        if(chartDom){
+          console.log(",]Mkainh Dom Empty")
+          chartDom.dispose();
+        }
+        var chartDom = document.getElementById('userwtkpiweek');
         var myChart3 = echarts.init(chartDom);
+        console.log("ChartDom ",chartDom)
         
     option = {
         title: {

@@ -286,14 +286,14 @@ function submitresult(){
 
 
 function validate(){
-    location.replace("localhost/home.html")
+    location.replace("home.html")
     var username = document.getElementById("username").value;
     localStorage.setItem("user", username);
     
     var password = document.getElementById("password").value;
     if ( username == 1001 && password == 1001){
     console.log("redirecting")
-    location.replace("localhost/home.html")
+    location.replace("home.html")
     alert ("Login successfully");
     }
     else{
