@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="dashboardAdmin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Include the ECharts file you just downloaded -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/echarts@5.2.0/dist/echarts.js"></script>-->
+    <script src="library/echarts-5.2.1/dist/echarts.js"></script>
+</head>
+<body>
+  <div class="topnav">
+    <a  href="home.html">Home</a>
+    <a class="active" href="dashboard.html">Dashboard</a>
+    <a href="#about">About</a>
+    <img src=./assets/dachser_logo.svg></img>
+  </div>
+    
+    <br>
+</div>
+<div class="content" id="calender">
+    <div class="Calender-bar">
+        <FORM class="form-inline">
+        <label for="Start Date">Start Date :</label>
+        <input type="date" id="Start Date"
+        th:name="Start Date">
+        <label for="End Date">&nbsp;End Date</label>
+        <input type="date"id="End Date"
+        th:name="End Date">
+        <br>
+        <input type="submit" value="submit" onclick=submit()
+        </form>    
+    </div>
+</div>
+     
+</body>
+</html>
+<script src="dashboardAdmin.js"></script>
