@@ -5,8 +5,7 @@ sdate=document.getElementById("Start Date").value
 edate=document.getElementById("End Date").value
 team=document.getElementById("team").value
 //team="Custom Import"
-sdate=sdate+' 00:00:00'
-edate=edate+' 00:00:00'
+
 console.log(sdate,"start date",edate,"start date",team,"team")
 checkurl1 ="http://dachserkpi.westus.cloudapp.azure.com:5000/StartEndDate?team="+team+"&start_date="+sdate+"&end_date="+edate;
 
