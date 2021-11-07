@@ -1,8 +1,19 @@
-function submit()
+async function submit()
 {
+console.log("started execution")
 sdate=document.getElementById("Start Date").value
-console.log(sdate,"start date")
-data=[{"Vehicle":"BMW","Date":"30, Jul 2013 09:24 AM","Location":"Hauz Khas, Enclave, New Delhi, Delhi, India","Speed":42},{"Vehicle":"Honda CBR","Date":"30, Jul 2013 12:00 AM","Location":"Military Road,  West Bengal 734013,  India","Speed":0},{"Vehicle":"Supra","Date":"30, Jul 2013 07:53 AM","Location":"Sec-45, St. Angel's School, Gurgaon, Haryana, India","Speed":58},{"Vehicle":"Land Cruiser","Date":"30, Jul 2013 09:35 AM","Location":"DLF Phase I, Marble Market, Gurgaon, Haryana, India","Speed":83},{"Vehicle":"Suzuki Swift","Date":"30, Jul 2013 12:02 AM","Location":"Behind Central Bank RO, Ram Krishna Rd by-lane, Siliguri, West Bengal, India","Speed":0},{"Vehicle":"Honda Civic","Date":"30, Jul 2013 12:00 AM","Location":"Behind Central Bank RO, Ram Krishna Rd by-lane, Siliguri, West Bengal, India","Speed":0},{"Vehicle":"Honda Accord","Date":"30, Jul 2013 11:05 AM","Location":"DLF Phase IV, Super Mart 1, Gurgaon, Haryana, India","Speed":71}]
+edate=document.getElementById("End Date").value
+team=document.getElementById("team").value
+//team="Custom Import"
+sdate=sdate+' 00:00:00'
+edate=edate+' 00:00:00'
+console.log(sdate,"start date",edate,"start date",team,"team")
+checkurl1 ="http://dachserkpi.westus.cloudapp.azure.com:5000/StartEndDate?team="+team+"&start_date="+sdate+"&end_date="+edate;
+
+console.log(checkurl1)
+const response = await fetch(checkurl1);
+var data = await response.json();
+console.log(data)
 data2=[
     [
       "Mon, 25 Oct 2021 00:00:00 GMT", 
@@ -29,7 +40,7 @@ data2=[
       46.525
     ]
   ]
-JSONToCSVConvertor(data2, "KPI Report", true);
+JSONToCSVConvertor(data, "KPI Report", true);
 }
 
 function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
