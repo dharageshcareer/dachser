@@ -1,8 +1,8 @@
 var field=Array()
 $(document).ready(function() {
-    logstatus=localStorage.getItem("logstatus")
-    console.log("Loggin status is ",logstatus)
-    if(logstatus == "logged_in"){
+    logtoken=localStorage.getItem("token")
+    console.log("Loggin token is ",logtoken)
+    if(logtoken){
             console.log(localStorage.getItem("user"));
             $("#banner").empty();
             $("#banner").append("<h1>Welcome "+localStorage.getItem("user")+"</h1>")
@@ -190,7 +190,7 @@ async function checkresult(){
     console.log(checkurl)
     //await fetch(checkurl).then(response => response.json()).then(data => console.log(data));
     // Storing response
-    const response = await fetch(checkurl);
+    const response = await fetch(checkurl, { headers: { 'Authorization': logtoken }});
     // Storing data in form of JSON
     var data = await response.json();
     
@@ -320,7 +320,6 @@ function validate(){
 
 function logout(){
     console.log("logging out")
-    logstatus="logged_out"
-    localStorage.setItem("logstatus",logstatus)
+    localStorage.removeItem("token")
     location.replace("index.html")
 }

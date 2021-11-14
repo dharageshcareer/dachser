@@ -1,24 +1,26 @@
-function validate(){
-    location.replace("home.html")
+async function validate(){
+    console.log("Validating")
+    //location.replace("home.html")
     var username = document.getElementById("username").value;
-    localStorage.setItem("user", username);
     var password = document.getElementById("password").value;
-    
-    if ( username == 1001 && password == 1001){
-        var logginstatus = "logged_in"
-    localStorage.setItem("logstatus", logginstatus)
-    console.log("redirecting",logginstatus)
-    location.replace("home.html")
-    alert ("Login successfully");
+    loginurl="http://dachserkpi.westus.cloudapp.azure.com:5000/login?user_ID="+username+"&password="+password
+    console.log(loginurl)
+    const response = await fetch(loginurl);
+    // Storing data in form of JSON
+    var token = await response.json();
+    console.log(token)
+    if(token["access_token"]){
+        alert("Token Received")
+        console.log(token["access_token"])
+        localStorage.setItem("user", username);
+        localStorage.setItem("token",token["access_token"])
+        location.replace('home.html')
     }
     else{
-    // Decrementing by one.
-    alert("Please try login with correct credentials");
-    window.location.href = "http://dachserkpi.westus.cloudapp.azure.com/";
-
-  
+        alert("Please Login right credential")
     }
-    }
+    
+}
 
     document.querySelector("#myForm").addEventListener("submit", function(e){
         // Prevent the form from submitting
