@@ -1,71 +1,79 @@
 var field=Array()
 $(document).ready(function() {
-    console.log(localStorage.getItem("user"));
-    $("#banner").empty();
-    $("#banner").append("<h1>Welcome "+localStorage.getItem("user")+"</h1>")
-    $("#field3").change(function() {
-            var select = $("#field3 option:selected").val(); //Getting selected Menu3
-            switch (select) {
-                case "Custom Import":
-                   //appending option under Import;
-                   $("#field4").empty(); // initialize empty
-                   $.get("CustomImport.html", function( htmloptions) { //append option from html file
-                   $("#field4").append(htmloptions);
+    logstatus=localStorage.getItem("logstatus")
+    console.log("Loggin status is ",logstatus)
+    if(logstatus == "logged_in"){
+            console.log(localStorage.getItem("user"));
+            $("#banner").empty();
+            $("#banner").append("<h1>Welcome "+localStorage.getItem("user")+"</h1>")
+            $("#field3").change(function() {
+                    var select = $("#field3 option:selected").val(); //Getting selected Menu3
+                    switch (select) {
+                        case "Custom Import":
+                        //appending option under Import;
+                        $("#field4").empty(); // initialize empty
+                        $.get("CustomImport.html", function( htmloptions) { //append option from html file
+                        $("#field4").append(htmloptions);
+                        });
+                        break;
+                        case "Custom Export":
+                            //appending city option under Export;
+                            $("#field4").empty(); // initialize empty
+                            $.get("CustomExport.html", function( htmloptions) { //append option from html file
+                            $("#field4").append(htmloptions);
+                        });
+                            break;
+                    }
                 });
-                   break;
-                   case "Custom Export":
-                    //appending city option under Export;
-                    $("#field4").empty(); // initialize empty
-                    $.get("CustomExport.html", function( htmloptions) { //append option from html file
-                    $("#field4").append(htmloptions);
-                 });
-                    break;
-            }
+                $("#field4").change(function() {
+                
+                    var select = $("#field4 option:selected").val(); //Getting selected Menu3
+                    field[0] = $( "#field1" ).val();
+                    field[1] = $( "#field2" ).val();
+                    field[2] = $( "#field3" ).val();
+                    field[3] = $( "#field4" ).val();
+                    switch (select) {
+                        case "Import_Declaration":
+                        //appending option under Import;
+                        
+                        $("form").empty(); // initialize empty
+                        
+                        $("form").append("<p>Country:"+field[0]+"</p>");
+                        $("form").append("<p>Branch:"+field[1]+"</p>");
+                        $("form").append("<p>Team:"+field[2]+"</p>");
+                        $.get("importform.html", function(htmloptions) { //append option from html file
+                        $("form").append(htmloptions);
+                        });
+                        break; 
+                        case "Arrival":
+                        //appending option under Import;
+                        $("form").empty(); // initialize empty
+                        $.get("importform.html", function(htmloptions) { //append option from html file
+                        $("form").append(htmloptions);
+                        });
+                        break;
+                        case "Export_Declaration":
+                        //appending option under Import;
+                        $("form").empty(); // initialize empty
+                        $.get("exportform.html", function(htmloptions) { //append option from html file
+                        $("form").append(htmloptions);
+                        });
+                        break;
+                        case "EAD":
+                        //appending option under Import;
+                        $("form").empty(); // initialize empty
+                        $.get("exportform.html", function(htmloptions) { //append option from html file
+                        $("form").append(htmloptions);
+                        });
+                        break;
+                    }
+                
         });
-        $("#field4").change(function() {
-        
-            var select = $("#field4 option:selected").val(); //Getting selected Menu3
-            field[0] = $( "#field1" ).val();
-            field[1] = $( "#field2" ).val();
-            field[2] = $( "#field3" ).val();
-            field[3] = $( "#field4" ).val();
-            switch (select) {
-                case "Import_Declaration":
-                   //appending option under Import;
-                  
-                   $("form").empty(); // initialize empty
-                   
-                   $("form").append("<p>Country:"+field[0]+"</p>");
-                   $("form").append("<p>Branch:"+field[1]+"</p>");
-                   $("form").append("<p>Team:"+field[2]+"</p>");
-                   $.get("importform.html", function(htmloptions) { //append option from html file
-                   $("form").append(htmloptions);
-                });
-                break; 
-                case "Arrival":
-                //appending option under Import;
-                $("form").empty(); // initialize empty
-                $.get("importform.html", function(htmloptions) { //append option from html file
-                $("form").append(htmloptions);
-                });
-                break;
-                case "Export_Declaration":
-                //appending option under Import;
-                $("form").empty(); // initialize empty
-                $.get("exportform.html", function(htmloptions) { //append option from html file
-                $("form").append(htmloptions);
-                });
-                break;
-                case "EAD":
-                //appending option under Import;
-                $("form").empty(); // initialize empty
-                $.get("exportform.html", function(htmloptions) { //append option from html file
-                $("form").append(htmloptions);
-                });
-                break;
-            }
-        
-    });
+    }
+    else{
+        alert ("Please Login...");
+        location.replace("index.html")
+    }
 });
 function goBack() {
     window.history.back()
@@ -289,12 +297,16 @@ function validate(){
     location.replace("home.html")
     var username = document.getElementById("username").value;
     localStorage.setItem("user", username);
+   
     
     var password = document.getElementById("password").value;
     if ( username == 1001 && password == 1001){
     console.log("redirecting")
     location.replace("home.html")
+    var logginstatus = "logged_in"
+    localStorage.setItem("logstatus", logginstatus)
     alert ("Login successfully");
+
     }
     else{
     // Decrementing by one.
@@ -305,10 +317,10 @@ function validate(){
     }
     }
 
-    document.querySelector("#myForm").addEventListener("submit", function(e){
-        // Prevent the form from submitting
-        e.preventDefault();
-        // login() will be called when the form is submitted
-        validate();
-    });
-    
+
+function logout(){
+    console.log("logging out")
+    logstatus="logged_out"
+    localStorage.setItem("logstatus",logstatus)
+    location.replace("index.html")
+}

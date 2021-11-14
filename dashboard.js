@@ -247,7 +247,7 @@ function userwtkpiweek(){
 
 }
 async function getdata(){
-  user_id=document.getElementById("myInput").value
+  user_id=localStorage.getItem("user")
   //user_id=1001
   console.log("Getting report for User",user_id)
   checkurl1 ="http://dachserkpi.westus.cloudapp.azure.com:5000/perDay?user_id="+user_id;
@@ -281,11 +281,26 @@ async function loadchart(){
   
 }
 window.onload = function(e){ 
-  
-  $('#userwtkpiweek').hide();
-  $('#userwtpie').hide();
-  $('#userkpipie').hide();
-  //piechart();
- //barchart();
+  logstatus=localStorage.getItem("logstatus")
+  console.log("Loggin status is ",logstatus)
+  if(logstatus == "logged_in"){
+    $('#userwtkpiweek').hide();
+    $('#userwtpie').hide();
+    $('#userkpipie').hide();
+    loadchart()
+    //piechart();
+  //barchart();
+  }
+  else{
+    alert ("Please Login...");
+    location.replace("index.html")
+  }
  
+}
+
+function logout(){
+  console.log("logging out")
+  logstatus="logged_out"
+  localStorage.setItem("logstatus",logstatus)
+  location.replace("index.html")
 }
