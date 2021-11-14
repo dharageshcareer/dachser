@@ -4,6 +4,19 @@ console.log("started execution")
 sdate=document.getElementById("Start Date").value
 edate=document.getElementById("End Date").value
 team=document.getElementById("team").value
+if (sdate <= edate)
+{
+  console.log(sdate,"start date",edate,"start date",team,"team")
+  checkurl1 ="http://dachserkpi.westus.cloudapp.azure.com:5000/StartEndDate?team="+team+"&start_date="+sdate+"&end_date="+edate;
+  
+  console.log(checkurl1)
+}
+else
+{
+  
+  alert("Start date should be less than end date");
+  //document.getElementById("edate").value="";
+}
 //team="Custom Import"
 
 console.log(sdate,"start date",edate,"start date",team,"team")
