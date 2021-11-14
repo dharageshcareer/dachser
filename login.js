@@ -8,7 +8,7 @@ async function validate(){
     const response = await fetch(loginurl);
     // Storing data in form of JSON
     var token = await response.json();
-    console.log(token)
+    console.log(token["access_token"])
     if(token["access_token"]){
         alert("Token Received")
         console.log(token["access_token"])

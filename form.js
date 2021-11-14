@@ -1,6 +1,8 @@
 var field=Array()
+var logtoken
+logtoken=localStorage.getItem("token")
 $(document).ready(function() {
-    logtoken=localStorage.getItem("token")
+    //logtoken=localStorage.getItem("token")
     console.log("Loggin token is ",logtoken)
     if(logtoken){
             console.log(localStorage.getItem("user"));
@@ -71,6 +73,7 @@ $(document).ready(function() {
         });
     }
     else{
+        console.log(logtoken)
         alert ("Please Login...");
         location.replace("index.html")
     }
@@ -190,7 +193,7 @@ async function checkresult(){
     console.log(checkurl)
     //await fetch(checkurl).then(response => response.json()).then(data => console.log(data));
     // Storing response
-    const response = await fetch(checkurl, { headers: { 'Authorization': logtoken }});
+    const response = await fetch(checkurl, { headers: { Authorization: `Bearer ${logtoken}`}});
     // Storing data in form of JSON
     var data = await response.json();
     
@@ -291,33 +294,6 @@ function submitresult(){
     });
     checkresult();
 }
-
-
-function validate(){
-    location.replace("home.html")
-    var username = document.getElementById("username").value;
-    localStorage.setItem("user", username);
-   
-    
-    var password = document.getElementById("password").value;
-    if ( username == 1001 && password == 1001){
-    console.log("redirecting")
-    location.replace("home.html")
-    var logginstatus = "logged_in"
-    localStorage.setItem("logstatus", logginstatus)
-    alert ("Login successfully");
-
-    }
-    else{
-    // Decrementing by one.
-    alert("Please try login with correct credentials");
-    window.location.href = "http://dachserkpi.westus.cloudapp.azure.com/";
-
-  
-    }
-    }
-
-
 function logout(){
     console.log("logging out")
     localStorage.removeItem("token")
