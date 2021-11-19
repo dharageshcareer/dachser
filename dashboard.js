@@ -163,7 +163,7 @@ function userwtkpiweek(){
    }
   $('#userwtkpiweekdiv').show();
         if(chartDom){
-          console.log(",]Mkainh Dom Empty")
+          console.log("Mkainh Dom Empty")
           chartDom.dispose();
         }
         var chartDom = document.getElementById('userwtkpiweek');

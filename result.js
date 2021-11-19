@@ -1,4 +1,5 @@
 window.onload = function(e){ 
+  console.log("Loggin")
 var chartDom = document.getElementById('gauge');
 var myChart = echarts.init(chartDom);
 var option;

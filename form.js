@@ -266,16 +266,17 @@ function showresult(){
     $("form").empty(); // initialize empty
     $("form").append(e);
     $.get("result.html", function(htmloptions) { //append option from html file
+        
         $("form").append(htmloptions);
+        $("#uname").append(localStorage.getItem("user"));
         $("#Country").append(field[0]);
         $("#Branch").append(field[1]);
         $("#Team").append(field[2]);
         $("#Type").append(field[3]);
-        $("form").append("<h3>UserName:"+localStorage.getItem("user")+"</h3>");
-        $("form").append("<h3>Consignments:"+conslist2+"</h3>");
-        $("form").append("<h3>Lines:"+array2+"</h3>");
-        $("form").append("<h1>Working Time:"+result+" Minutes</h1>");
-        $("form").append("<h1>KPI Units:"+result2+"</h1>");
+        $("form").append("<p>Total Consignments:"+conslist2.length+"</p>");
+        $("form").append("<p>No of Lines:"+array2+"</p>");
+        $("form").append("<p style='color:#00008B'><b>Working Time:</b>"+result+" Minutes</p>");
+        $("form").append("<p style='color:#00008B'><b>KPI Units:</b>"+result2+"</p>");
         $("#status").append("<p>Checking Duplicates....</p>");
         if(localStorage.getItem("consstatus") == "unique"){
             $("#dupstatus").hide()
