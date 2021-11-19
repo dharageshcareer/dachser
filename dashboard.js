@@ -281,9 +281,9 @@ async function loadchart(){
   
 }
 window.onload = function(e){ 
-  logstatus=localStorage.getItem("logstatus")
-  console.log("Loggin status is ",logstatus)
-  if(logstatus == "logged_in"){
+  jwttoken=localStorage.getItem("jwttoken")
+  console.log("Loggin status is ",jwttoken)
+  if(jwttoken){
     $('#userwtkpiweek').hide();
     $('#userwtpie').hide();
     $('#userkpipie').hide();
@@ -301,6 +301,6 @@ window.onload = function(e){
 function logout(){
   console.log("logging out")
   logstatus="logged_out"
-  localStorage.setItem("logstatus",logstatus)
+  localStorage.setItem("logstatus",jwttoken)
   location.replace("index.html")
 }

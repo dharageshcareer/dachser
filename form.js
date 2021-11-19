@@ -1,10 +1,19 @@
 var field=Array()
 var logtoken
-logtoken=localStorage.getItem("token")
+
+self.getToken = function() {
+    return localStorage.getItem("jwttoken")
+  }
+logtoken=getToken()
+
 $(document).ready(function() {
+    
     //logtoken=localStorage.getItem("token")
     console.log("Loggin token is ",logtoken)
+    
     if(logtoken){
+            usernamestore=localStorage.getItem("user")
+            console.log("stored uname is",usernamestore)
             console.log(localStorage.getItem("user"));
             $("#banner").empty();
             $("#banner").append("<h1>Welcome "+localStorage.getItem("user")+"</h1>")
@@ -191,9 +200,14 @@ async function checkresult(){
     checkurl ="http://dachserkpi.westus.cloudapp.azure.com:5000/consignment?consignId=["+conslist0+"]"
     //checkurl ="http://127.0.0.1:5000/consignment?consignId=[8001]"
     console.log(checkurl)
+    console.log("For checking below are tokens")
+    console.log(logtoken)
+    
     //await fetch(checkurl).then(response => response.json()).then(data => console.log(data));
     // Storing response
     const response = await fetch(checkurl, { headers: { Authorization: `Bearer ${logtoken}`}});
+    //const response = await fetch(checkurl, { headers: { Authorization: localStorage.getItem("tokenrec")}});
+
     // Storing data in form of JSON
     var data = await response.json();
     
@@ -285,8 +299,10 @@ function showresult(){
 function submitresult(){
     
     var myItem = localStorage.getItem('user');
+    var myItem2 = localStorage.getItem('jwttoken')
     localStorage.clear();
     localStorage.setItem('user',myItem);
+    localStorage.setItem('jwttoken',myItem2);
     console.log(myItem,"username---------------------");
     $("form").empty(); // initialize empty
     $.get("loading.html", function(htmloptions) { //append option from html file
@@ -296,6 +312,6 @@ function submitresult(){
 }
 function logout(){
     console.log("logging out")
-    localStorage.removeItem("token")
+    localStorage.removeItem("jwttoken")
     location.replace("index.html")
 }

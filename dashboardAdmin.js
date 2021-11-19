@@ -26,32 +26,6 @@ console.log(checkurl1)
 const response = await fetch(checkurl1);
 var data = await response.json();
 console.log(data)
-data2=[
-    [
-      "Mon, 25 Oct 2021 00:00:00 GMT", 
-      "Admin", 
-      "1002", 
-      2.3
-    ], 
-    [
-      "Mon, 25 Oct 2021 00:00:00 GMT", 
-      "Alex", 
-      "1001", 
-      2.3
-    ], 
-    [
-      "Tue, 26 Oct 2021 00:00:00 GMT", 
-      "Alex", 
-      "1001", 
-      2.3
-    ], 
-    [
-      "Wed, 27 Oct 2021 00:00:00 GMT", 
-      "Alex", 
-      "1001", 
-      46.525
-    ]
-  ]
 JSONToCSVConvertor(data, "KPI Report", true);
 }
 
@@ -126,4 +100,20 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+}
+
+window.onload = function(e){ 
+  jwttoken=localStorage.getItem("jwttoken")
+  console.log("Loggin status is ",jwttoken)
+  if(!jwttoken){
+    alert ("Please Login...");
+    location.replace("index.html")
+  }
+}
+
+function logout(){
+  console.log("logging out")
+  logstatus="logged_out"
+  localStorage.setItem("logstatus",jwttoken)
+  location.replace("index.html")
 }

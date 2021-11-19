@@ -8,12 +8,17 @@ async function validate(){
     const response = await fetch(loginurl);
     // Storing data in form of JSON
     var token = await response.json();
-    console.log(token["access_token"])
-    if(token["access_token"]){
-        alert("Token Received")
-        console.log(token["access_token"])
+    tok=token["access_token"]
+    console.log(tok)
+    if(tok){
+        console.log("Inside if tok",tok)
+        self.saveToken = function(token) {
+            localStorage.setItem("jwttoken",tok);
+          }
+        saveToken()
+        alert("Token Received Loign Successfully")
         localStorage.setItem("user", username);
-        localStorage.setItem("token",token["access_token"])
+        //localStorage.setItem("tokenrec",tok)
         location.replace('home.html')
     }
     else{
