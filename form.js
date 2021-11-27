@@ -171,28 +171,16 @@ async function checkresult(){
     flag=false
     userdet=localStorage.getItem("user")
     conslist0=field[4].slice(0,field[4].length)
-    /*for(i=1;i<=field[4].length;i++){
-        temp=field[4].slice(0,field[4].length);
-        console.log(temp[i]);  
-        connum=temp[i].length;
-        console.log(i,connum)
-        if(connum != 11){
-            flag=true
-            }
-        }
-        if(flag=true){
-            alert("Consignment number digit check")
-        }
-        else{*/
     
     
     conslist0.shift()
+    conslist0[0].splice(1,1)
     console.log("Consignment checking are",conslist0)
     S=conslist0.length
     x=5
     y=2
     n=array2[0]
-    result=S * [x + (n*1/y)]
+    result=(S*x)+(n*1/y)
     result2=result/100
     console.log("num of cons is", S)
     console.log("num of line is is", n)
@@ -231,6 +219,7 @@ async function insert(showresult){
     userdet=localStorage.getItem("user")
     conslist1=field[4].slice(0,field[4].length)
     conslist1.shift()
+    conslist1[0].splice(1,1)
     insertUrl1="http://dachserkpi.westus.cloudapp.azure.com:5000/addconsignment?user_ID="+userdet+"&consignment=["+conslist1+"]&consignment_type="+field[3]
     
     console.log("inserted",conslist1)
@@ -238,7 +227,7 @@ async function insert(showresult){
     x=5
     y=2
     n=array2[0]
-    result=S * [x + (n*1/y)]
+    result=(S*x)+(n*1/y)
     result2=result/100
     
     insertUrl2="http://dachserkpi.westus.cloudapp.azure.com:5000/addkpi?user_ID="+userdet+"&totalconsignment="+S+"&consignment_type="+field[3]+"&workingTime="+result+"&kpi="+result2
@@ -257,7 +246,7 @@ function showresult(){
     x=5
     y=2
     n=array2[0]
-    result=S * [x + (n*1/y)]
+    result=(S*x)+(n*1/y)
     result2=result/100
     console.log("S is", S)
     console.log("n is", n)
@@ -293,9 +282,77 @@ function showresult(){
             console.log(consdups)
             $("#dupstatus").append("<p>"+consdups+"</p>");
         }
-        
+        gauge()
         });
+    
 }
+function gauge(){
+     
+        console.log("Loggin")
+        var chartDom = document.getElementById('gauge');
+        var myChart = echarts.init(chartDom);
+        var option;
+        option = {
+            series: [
+              {
+                type: 'gauge',
+                min: 0,
+                max:10,
+                splitNumber: 5,
+                axisLine: {
+                  lineStyle: {
+                    width: 10,
+                    color: [
+                      [0.3, '#fd666d'],
+                      [0.7, '#FFBF00'],
+                      [1, 'GREEN']
+                    ]
+                  }
+                },
+                pointer: {
+                  itemStyle: {
+                    color: 'auto'
+                  }
+                },
+                axisTick: {
+                  distance: -40,
+                  length: 8,
+                  lineStyle: {
+                    color: '#fff',
+                    width: 2
+                  }
+                },
+                splitLine: {
+                  distance: -30,
+                  length: 30,
+                  lineStyle: {
+                    color: 'white',
+                    width: 4
+                  }
+                },
+                axisLabel: {
+                  color: 'auto',
+                  distance: 20,
+                  fontSize: 10
+                },
+                detail: {
+                  valueAnimation: true,
+                  fontSize: 15,
+                  fontWeight: 'bolder',
+                  formatter: '{value} KPI ',
+                  color: 'auto'
+                },
+                data: [
+                  {
+                    value: result2
+                  }
+                ]
+              }
+            ]
+          };
+
+          option && myChart.setOption(option);
+        }
 
 function submitresult(){
     

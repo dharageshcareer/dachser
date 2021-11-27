@@ -17,7 +17,7 @@ function excelfun() {
     // header: 1 instructs xlsx to create an 'array of arrays'
     field[4] = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
     nooflines = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
-    console.log(field[4])
+    console.log("field4 is",field[4])
     array2[0]=nooflines[1][1]
     /*for(i=1;i<=field[4].length;i++){
       if(field[4][i][1].length != 11){
