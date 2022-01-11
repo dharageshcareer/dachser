@@ -15,23 +15,45 @@ function excelfun() {
     var firstSheet = workbook.Sheets[workbook.SheetNames[0]];
     
     // header: 1 instructs xlsx to create an 'array of arrays'
-    field[4] = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+    conslis = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
     nooflines = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
-    console.log("field4 is",field[4])
-    array2[0]=nooflines[1][1]
-    /*for(i=1;i<=field[4].length;i++){
-      if(field[4][i][1].length != 11){
-        console.log("nOT 11 IS",field[4][i][1])
+    console.log("conslis is",conslis)
+    array2[0]=0
+    i=1
+    notineleven=[]
+    field[4]=[]
+    k=0
+    try{
+    while(i<=nooflines.length){
+      
+      console.log(i,typeof i,typeof nooflines[i][1],nooflines[i][1])
+     
+      array2[0]=array2[0]+nooflines[i][1]
+      console.log("so far sum of lines is",array2[0])
+      console.log("cons len",conslis[i][0].toString().length)
+      if(conslis[i][0].toString().length != 14){
+        notineleven[k]=conslis[i][0]
+        k++
       }
-      else{
-        console.log("Every are 11")
-      }
-    }*/
-    console.log(array2[0])
-    // data preview
-    var output = document.getElementById('Result');
+      field[4][i-1]=conslis[i][0]
+      i++
+      
+    }
     
-    output.innerHTML = "Total Consignment in Excel is "+(field[4].length-1)+"<br />" +"No of Lines is "+array2[0]+"<br />"+"<input style='background: #28a745; width:200px; font-size:18px;' type='button' id='subbutton' value='submit' onclick='submitresult();'></input>"
+  }
+  catch(err) {
+                  console.log("After Sum",array2[0],"notineleven is",notineleven,"field4 is",field[4])
+                  if(notineleven.length>0){
+                    var output = document.getElementById('Result');
+                    output.innerHTML = "Consignment must have 14 digit...<br /><p>Recheck the below and add new file by saving it in new version<p style='color: red;'>"+notineleven+"</p>"
+                  }
+                  else{
+                    // data preview
+                    var output = document.getElementById('Result');
+                    output.innerHTML = "Total Consignment in Excel is "+(field[4].length)+"<br />" +"No of Lines is "+array2[0]+"<br />"+"<input style='background: #28a745; width:200px; font-size:18px;' type='button' id='subbutton' value='submit' onclick='submitresult();'></input>"
+                  }
+
+    }
     
   };
   FR.readAsArrayBuffer(file.files[0]);

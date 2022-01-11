@@ -170,11 +170,10 @@ async function checkresult(){
     //validation inputs
     flag=false
     userdet=localStorage.getItem("user")
-    conslist0=field[4].slice(0,field[4].length)
-    
-    
-    conslist0.shift()
-    conslist0[0].splice(1,1)
+    //conslist0=field[4].slice(0,field[4].length)
+    //conslist0.shift()
+    //conslist0[0].splice(1,1)
+    conslist0=field[4]
     console.log("Consignment checking are",conslist0)
     S=conslist0.length
     x=5
@@ -201,6 +200,12 @@ async function checkresult(){
     
     console.log(data);
     conscheck=data
+    console.log("msg",data.msg)
+    if(conscheck.msg){
+      alert("Please Login session expired")
+      location.replace("index.html")
+    }
+    else{
     console.log("cons check",conscheck)
     localStorage.setItem("consstatus",conscheck[0])
     localStorage.setItem("consdatadup", data)
@@ -211,15 +216,17 @@ async function checkresult(){
     else{
         showresult();
     }
+  }
 }
 
 
 async function insert(showresult){ 
     console.log("Data getting inserted")
     userdet=localStorage.getItem("user")
-    conslist1=field[4].slice(0,field[4].length)
-    conslist1.shift()
-    conslist1[0].splice(1,1)
+    //conslist1=field[4].slice(0,field[4].length)
+    //conslist1.shift()
+    //conslist1[0].splice(1,1)
+    conslist1=field[4]
     insertUrl1="http://dachserkpi.westus.cloudapp.azure.com:5000/addconsignment?user_ID="+userdet+"&consignment=["+conslist1+"]&consignment_type="+field[3]
     
     console.log("inserted",conslist1)
@@ -239,8 +246,9 @@ async function insert(showresult){
 function showresult(){
     userdet=localStorage.getItem("user")
     console.log("showing field4",field[4])
-    conslist2=field[4].slice(0,field[4].length)
-    conslist2.shift()
+    //conslist2=field[4].slice(0,field[4].length)
+    //conslist2.shift()
+    conslist2=field[4]
     S=conslist2.length
     console.log("showing ",field[4],S,conslist2)
     x=5
